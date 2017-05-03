@@ -1,6 +1,7 @@
 package com.example.nickolas.test;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ public class CustomFriendAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<String> name, photo;
+    private ArrayList<Integer> ids;
 
     @Override
     public int getCount() {
@@ -35,10 +37,11 @@ public class CustomFriendAdapter extends BaseAdapter {
         return position;
     }
 
-    public CustomFriendAdapter(Context context, ArrayList<String> name, ArrayList<String> photo) {
+    public CustomFriendAdapter(Context context, ArrayList<String> name, ArrayList<String> photo, ArrayList<Integer> ids) {
         this.context = context;
         this.name = name;
         this.photo = photo;
+        this.ids = ids;
     }
 
     @Override
@@ -53,7 +56,14 @@ public class CustomFriendAdapter extends BaseAdapter {
 
         new DownloadImageTask(setData.imageView).execute(photo.get(position));
         setData.textView.setText(name.get(position));
-
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Messages.class);
+                intent.putExtra("user_id", ids.get(position));
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 

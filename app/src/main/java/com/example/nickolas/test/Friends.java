@@ -6,6 +6,7 @@ import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import com.vk.sdk.api.model.VKApiDialog;
+import com.vk.sdk.api.model.VKApiUser;
 import com.vk.sdk.api.model.VKList;
 
 /**
@@ -14,7 +15,7 @@ import com.vk.sdk.api.model.VKList;
 
 public final class Friends {
 
-    public static VKList<VKApiDialog> list;
+    public static VKList<VKApiUser> list;
 
     public static void setList() {
         VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.FIELDS, "photo_50", "order", "hints")); //Error please check;

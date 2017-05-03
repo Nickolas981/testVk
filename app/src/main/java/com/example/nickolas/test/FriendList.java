@@ -3,6 +3,7 @@ package com.example.nickolas.test;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.ListView;
 
 import com.vk.sdk.VKAccessToken;
@@ -19,7 +20,7 @@ import com.vk.sdk.api.model.VKList;
 
 import java.util.ArrayList;
 
-public class FriendList extends Activity {
+public class FriendList extends ActionBarActivity {
 
     private VKList list;
     private ListView listView;
@@ -45,12 +46,14 @@ public class FriendList extends Activity {
                         list = (VKList) response.parsedModel;
                         ArrayList<String> names = new ArrayList<String>();
                         ArrayList<String> avatars = new ArrayList<String>();
+                        ArrayList<Integer> ids = new ArrayList<Integer>();
                         VKList<VKApiUser> userVKList = (VKList<VKApiUser>) response.parsedModel;
                         for (VKApiUser user : userVKList) {
                             names.add(user.first_name + " " + user.last_name);
                             avatars.add(user.photo_50);
+                            ids.add(user.id);
                         }
-                        listView.setAdapter(new CustomFriendAdapter(FriendList.this, names, avatars));
+                        listView.setAdapter(new CustomFriendAdapter(FriendList.this, names, avatars, ids));
                     }
                 });
             }

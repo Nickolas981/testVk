@@ -2,5 +2,6 @@
     <string name="app_name">Test</string>
     <string name="refresh">refresh</string>
     <string name="message">Message</string>
+    <string name="send">Send</string>
     <integer name="com_vk_sdk_AppId">6010424</integer>
 </resources>
