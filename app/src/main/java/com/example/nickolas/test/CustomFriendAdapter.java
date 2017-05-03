@@ -48,8 +48,8 @@ public class CustomFriendAdapter extends BaseAdapter {
         View view = inflater.inflate(R.layout.custom_friends_view, null);
         SetData setData = new SetData();
 
-        setData.imageView = (ImageView) view.findViewById(R.id.avatarImage);
-        setData.textView = (TextView) view.findViewById(R.id.nameTextView);
+        setData.imageView = (ImageView) view.findViewById(R.id.friendAvatarImage);
+        setData.textView = (TextView) view.findViewById(R.id.friendNameTextView);
 
         new DownloadImageTask(setData.imageView).execute(photo.get(position));
         setData.textView.setText(name.get(position));

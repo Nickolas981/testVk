@@ -5,42 +5,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vk.sdk.api.VKApiConst;
-import com.vk.sdk.api.VKParameters;
-import com.vk.sdk.api.VKRequest;
-import com.vk.sdk.api.VKResponse;
-import com.vk.sdk.api.model.VKApiDialog;
+import com.vk.sdk.api.model.VKApiMessage;
 import com.vk.sdk.api.model.VKList;
 
-import java.util.ArrayList;
-
 /**
- * Created by Nickolas on 30.04.2017.
+ * Created by Nickolas on 02.05.2017.
  */
 
-class CustomMessageAdapter extends BaseAdapter {
+public class CustomMessageAdapter extends BaseAdapter {
 
+   VKApiMessage[] messages;
+    Context context;
 
-    private ArrayList<String> users, messages;
-    private Context context;
-    private VKList<VKApiDialog> list;
-    private EditText etMsg;
-
-    public CustomMessageAdapter(Context context, ArrayList<String> users, ArrayList<String> messages, VKList<VKApiDialog> list, EditText etMsg) {
-        this.users = users;
-        this.messages = messages;
+    public CustomMessageAdapter(Context context, VKApiMessage[] messages) {
+        this.messages = new VKApiMessage[messages.length];
+        for (int i = 0; i < messages.length; i++) {
+            this.messages[i] = messages[i];
+        }
         this.context = context;
-        this.list = list;
-        this.etMsg = etMsg;
     }
 
     @Override
     public int getCount() {
-        return users.size();
+        return messages.length;
     }
 
     @Override
@@ -54,49 +43,24 @@ class CustomMessageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, final View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         SetData setData = new SetData();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.customlistview, null);
-        setData.userName = (TextView) view.findViewById(R.id.user_name);
-        setData.msg = (TextView) view.findViewById(R.id.msg);
-        setData.imageView = (ImageView) view.findViewById(R.id.imageView2);
-//        VKParameters parameters = new VKParameters();
-//        parameters.put("users_ids", list.get(position).message.user_id);
-//        VKRequest request = new VKRequest("users.get", parameters);
-//        request.executeWithListener(new VKRequest.VKRequestListener() {
-//            @Override
-//            public void onComplete(VKResponse response) {
-//                System.out.println(list.get(position).message.user_id);
-//                System.out.println(response);
-//
-//                super.onComplete(response);
-//            }
-//        });
-        setData.userName.setText(users.get(position));
-        setData.msg.setText(messages.get(position));
-        int id = view.getResources().getIdentifier("com.example.nickolas.test:drawable/vk_icon", null, null);
-        setData.imageView.setImageResource(id);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                VKRequest vkRequest = new VKRequest("messages.send", VKParameters.from(VKApiConst.USER_ID, list.get(position).message.user_id, VKApiConst.MESSAGE, etMsg.getText().toString()));
-                etMsg.setText("");
-                vkRequest.executeWithListener(new VKRequest.VKRequestListener() {
-                    @Override
-                    public void onComplete(VKResponse response) {
-                        super.onComplete(response);
-                        System.out.println("Отправлено");
-                    }
-                });
-            }
-        });
+        View view;
 
+        if (messages[position].out){
+            view = inflater.inflate(R.layout.custom_message_out_view, null);
+            setData.textView = (TextView) view.findViewById(R.id.messageOut);
+        } else {
+            view = inflater.inflate(R.layout.custom_message_in_view, null);
+            setData.textView = (TextView) view.findViewById(R.id.messageIn);
+        }
+        setData.textView.setText(messages[position].body);
+        
         return view;
     }
 
-    public class SetData {
-        TextView userName, msg;
-        ImageView imageView;
+    private class SetData {
+        TextView textView;
     }
 }

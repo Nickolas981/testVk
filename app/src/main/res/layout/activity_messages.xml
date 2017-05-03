@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nickolas.test.MainActivity">
+    tools:context="com.example.nickolas.test.Messages">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -13,7 +13,7 @@
         tools:layout_editor_absoluteY="8dp">
 
         <ListView
-            android:id="@+id/dialogListView"
+            android:id="@+id/messageListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="0dp"
@@ -24,22 +24,21 @@
             android:id="@+id/sendMessage"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
-            android:text="@string/refresh"
+            android:text="@string/vk_send"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editTextMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/dialogListView"
+            android:layout_below="@+id/messageListView"
             android:layout_toStartOf="@+id/sendMessage"
             android:ems="10"
             android:hint="@string/message"
             android:inputType="textPersonName" />
 
     </RelativeLayout>
-
 </android.support.constraint.ConstraintLayout>
