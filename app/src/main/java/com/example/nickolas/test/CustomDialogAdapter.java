@@ -52,7 +52,7 @@ class CustomDialogAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, final View convertView, ViewGroup parent) {
-        SetData setData = new SetData();
+        final SetData setData = new SetData();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.custom_dialogs_view, null);
         setData.userName = (TextView) view.findViewById(R.id.user_name);
@@ -66,6 +66,7 @@ class CustomDialogAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Messages.class);
+                intent.putExtra("user_name", setData.userName.getText().toString());
                 intent.putExtra("user_id", list.get(position).message.user_id);
                 context.startActivity(intent);
             }

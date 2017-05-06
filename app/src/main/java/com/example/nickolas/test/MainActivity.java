@@ -38,6 +38,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Messages.dialogListView = (ListView) findViewById(R.id.dialogListView);
         VKSdk.login(this, scope);
+        getSupportActionBar().setTitle("Dialogs");
         VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.FIELDS, "photo_50", "order", "hints"));
         request.executeWithListener(new VKRequest.VKRequestListener() {
             @Override

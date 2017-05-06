@@ -34,6 +34,7 @@ public class FriendList extends ActionBarActivity {
         int requestCode = intent.getIntExtra("requestCode", 0);
         int resultCode = intent.getIntExtra("resultCode", 0);
         Intent data = (Intent) intent.getParcelableExtra("data");
+        getSupportActionBar().setTitle("Friend's List");
 
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override

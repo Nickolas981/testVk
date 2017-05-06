@@ -45,7 +45,7 @@ public class CustomFriendAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         Bitmap[] photo_50 = new Bitmap[1];
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.custom_friends_view, null);
@@ -62,6 +62,7 @@ public class CustomFriendAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, Messages.class);
                 intent.putExtra("user_id", ids.get(position));
                 context.startActivity(intent);
+
             }
         });
         return view;

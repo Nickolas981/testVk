@@ -43,7 +43,9 @@ public class Messages extends ActionBarActivity implements View.OnClickListener 
         Intent intent = getIntent();
 
         id = intent.getIntExtra("user_id", 1);
-
+        getSupportActionBar().setTitle(intent.getStringExtra("user_name"));
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         refreshMessages();
 
     }
@@ -54,10 +56,14 @@ public class Messages extends ActionBarActivity implements View.OnClickListener 
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionRefreshMessages){
             refreshMessages();
+        } else if (item.getItemId() == android.R.id.home){
+            finish();
         }
         return true;
     }
