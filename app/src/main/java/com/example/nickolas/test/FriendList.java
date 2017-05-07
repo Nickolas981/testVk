@@ -60,6 +60,7 @@ public class FriendList extends ActionBarActivity {
             }
             @Override
             public void onError(VKError error) {
+                System.out.println("error");
             }
         })) {
             super.onActivityResult(requestCode, resultCode, data);
